@@ -1,0 +1,19 @@
+import csv
+
+def staty(nazev_obce, datum):
+    """vstupni format:
+       0   1     2        3          4         5           6       7         8
+       den;datum;kraj_kod;kraj_nazev;okres_kod;okres_nazev;orp_kod;orp_nazev;opou_kod;
+       9          10       11         12           13
+       opou_nazev;obec_kod;obec_nazev;nove_pripady;aktualne_nemocnych
+"""
+    with open("obec.csv", mode= "r", encoding="utf-8") as soubor:
+        obce = csv.reader(soubor, delimiter=";")
+        radky = []
+        for row in obce:
+            if row[11] == nazev_obce and row[1] == datum:
+                radky.append(row)
+        return radky
+
+radky = staty("Karlovy Vary", "2020-03-17")
+print(radky)
